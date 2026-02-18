@@ -1,0 +1,40 @@
+version: 2
+
+sources:
+  - name: adw
+    database: fea_academy
+    schema: adventure_works
+    tables:
+      - name: sales_salesorderheader
+        description: fact table de orders da Adventure Works. PK = salesorderid. Grao = order. Possui data, status, territory, credit card e business_entity_id
+        columns:
+          - name: salesorderid
+            description: Chave primária da tabela salesorderheader
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_salesorderdetail
+        description: fact table de detalhes de cada order. Grao = produto. Possui produto, quantidade, preco unitario, e desconto
+        columns:
+          - name: salesorderdetailid
+            description: Chave primária da tabela sales_salesorderdetail
+            tests:
+              - unique
+              - not_null
+      - name: sales_creditcard
+        description: dim table com informacao do tipo de cartao de credito
+      - name: sales_customer
+        description: dim table com id do cliente para linkar com person_person
+      - name: person_person
+        description: dim table com o nome do cliente
+      - name: sales_salesterritory
+        description: dim table com o territory id para linkar na tabela stateprovince  
+      - name: person_stateprovince
+        description: dim table com o state, city e country
+      - name: sales_salesorderheadersalesreason
+        description: dim table com a salesreasonid para linkar com a reason em salesreason
+      - name: sales_salesreason
+        description: dim table com a reason
+      - name: sales_salesperson
+        description: dim table do vendedor
