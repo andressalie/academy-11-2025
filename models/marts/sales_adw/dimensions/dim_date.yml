@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: "Dimensão de datas gerada via dbt_utils.date_spine"
+
+    columns:
+      - name: date_sk
+        description: "Chave substituta no formato YYYYMMDD"
+        tests:
+          - not_null
+          - unique
+
+      - name: date
+        description: "Data calendário"
+        tests:
+          - not_null
+          - unique
+
+      - name: year
+        tests:
+          - not_null
