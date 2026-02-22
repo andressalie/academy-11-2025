@@ -2,7 +2,16 @@ with
 
 source as (
 
-    select * from {{ source('adw', 'sales_salesorderdetail') }}
+    select 
+    salesorderid 
+    , salesorderdetailid
+    , productid
+    , specialofferid
+    , orderqty
+    , unitprice
+    , unitpricediscount
+    
+    from {{ source('adw', 'sales_salesorderdetail') }}
 
 ),
 
