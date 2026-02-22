@@ -5,6 +5,8 @@ sources:
     database: fea_academy
     schema: adventure_works
     tables:
+
+    #SALES
       - name: sales_salesorderheader
         description: fact table de orders da Adventure Works. PK = salesorderid. Grao = order. Possui data, status, territory, credit card e business_entity_id
         columns:
@@ -22,6 +24,36 @@ sources:
             tests:
               - unique
               - not_null
+
+    #PRODUCT
+      - name: production_product
+        description: dim table de produtos
+        columns:
+          - name: productid
+            description: Chave primária da tabela production_product
+            tests:
+              - unique
+              - not_null
+
+      - name: production_productsubcategory
+        description: para complementar a dim table de produtos
+        columns:
+          - name: productsubcategoryid
+            description: Chave primária da tabela production_productsubcategory
+            tests:
+              - unique
+              - not_null
+
+      - name: production_productcategory
+        description: para complementar dim table de produtos
+        columns:
+          - name: productcategoryid
+            description: Chave primária da tabela production_productcategory
+            tests:
+              - unique
+              - not_null
+
+
       - name: sales_creditcard
         description: dim table com informacao do tipo de cartao de credito
       - name: sales_customer
@@ -38,3 +70,6 @@ sources:
         description: dim table com a reason
       - name: sales_salesperson
         description: dim table do vendedor
+      - name: sales_specialoffer
+        description: dim table das offers
+      
