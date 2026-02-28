@@ -3,8 +3,8 @@ with
 source as (
 
     select 
-        productcategoryid
-        , name
+        productcategoryid,
+        name
         --, rowguid
         --, modifieddate
     from {{ source('adw', 'production_productcategory') }}
@@ -14,8 +14,8 @@ source as (
 renamed as (
 
     select
-        cast(productcategoryid as int) product_category_pk
-        , cast(name as string) product_category_name
+        cast(productcategoryid as int) product_category_pk,
+        cast(name as string) product_category_name
         
 
     from source
