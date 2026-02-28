@@ -3,8 +3,8 @@ with
 source as (
 
     select 
-        productid
-        , name
+        productid,
+        name,
         /*productnumber,
         makeflag,
         finishedgoodsflag,
@@ -21,7 +21,7 @@ source as (
         productline,
         class,*/
         --style,
-        , productsubcategoryid
+        productsubcategoryid
         /*productmodelid,
         sellstartdate,
         sellenddate,
@@ -36,11 +36,11 @@ source as (
 renamed as (
 
     select
-        cast(productid as int) as product_pk
+        cast(productid as int) as product_pk,
         
-        , cast(productsubcategoryid as int) as product_subcategory_fk
+        cast(productsubcategoryid as int) as product_subcategory_fk,
 
-        , cast(name as string) as product_name
+        cast(name as string) as product_name
         
     from source
 

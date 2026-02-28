@@ -15,13 +15,13 @@ with
     
     , joined as (
         select
-            p.product_pk
-            , p.product_subcategory_fk
-            , sc.product_category_fk
+            p.product_pk,
+            p.product_subcategory_fk,
+            sc.product_category_fk,
 
-            , p.product_name
-            , sc.product_subcategory_name
-            , c.product_category_name
+            p.product_name,
+            sc.product_subcategory_name,
+            c.product_category_name
 
         from product p
         left join subcategory sc on p.product_subcategory_fk = sc.product_subcategory_pk

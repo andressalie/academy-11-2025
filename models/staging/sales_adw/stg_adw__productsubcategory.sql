@@ -3,9 +3,9 @@ with
 source as (
 
     select 
-        productsubcategoryid
-        , productcategoryid
-        , name
+        productsubcategoryid,
+        productcategoryid,
+        name
         --, rowguid
         --, modifieddate
     
@@ -16,9 +16,9 @@ source as (
 renamed as (
 
     select
-        cast(productsubcategoryid as int) as product_subcategory_pk
-        , cast(productcategoryid as int) as product_category_fk
-        , cast(name as string) as product_subcategory_name
+        cast(productsubcategoryid as int) as product_subcategory_pk,
+        cast(productcategoryid as int) as product_category_fk,
+        cast(name as string) as product_subcategory_name
 
     from source
 

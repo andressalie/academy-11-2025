@@ -24,6 +24,7 @@ sources:
             tests:
               - unique
               - not_null
+      
 
     #PRODUCT
       - name: production_product
@@ -54,20 +55,46 @@ sources:
               - not_null
 
 
+      #REASON
+      - name: sales_salesorderheadersalesreason
+        description: tabela para conectar orders com a salesreason pelo salesreasonid
+    
+        columns:
+          - name: salesorderid
+            description: Chave estrangeira para a tabela salesorderheader
+            tests:
+              - unique
+              - not_null
+
+          - name: sales_reason_id
+            description: Chave estrangeira para a tabela salesreason.
+            tests:
+              - not_null
+            
+       
+      - name: sales_salesreason
+        description: tabela que traz a reason da venda e type
+        columns:
+          - name: salesreasonid
+            description: Chave primária da tabela sales_salesorderdetail
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_salesterritory
+        description: dim table com o territory id para linkar na tabela stateprovince  
+      - name: person_stateprovince
+        description: dim table com o state, city e country
+
+
       - name: sales_creditcard
         description: dim table com informacao do tipo de cartao de credito
       - name: sales_customer
         description: dim table com id do cliente para linkar com person_person
       - name: person_person
         description: dim table com o nome do cliente
-      - name: sales_salesterritory
-        description: dim table com o territory id para linkar na tabela stateprovince  
-      - name: person_stateprovince
-        description: dim table com o state, city e country
-      - name: sales_salesorderheadersalesreason
-        description: dim table com a salesreasonid para linkar com a reason em salesreason
-      - name: sales_salesreason
-        description: dim table com a reason
+      
+      
       - name: sales_salesperson
         description: dim table do vendedor
       - name: sales_specialoffer
