@@ -18,6 +18,7 @@ renamed as (
         
 
     from source
+    where countryregioncode is not null
 
 )
 
