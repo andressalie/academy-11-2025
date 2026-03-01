@@ -17,9 +17,9 @@ with
 
     , joined as (
         select 
+            c.address_pk,
             s.country_fk,
             c.state_fk,
-            c.address_pk,
             
             t.country_name,
             s.state_name,

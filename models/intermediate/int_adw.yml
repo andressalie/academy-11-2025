@@ -1,0 +1,140 @@
+version: 2
+
+models:
+
+#CLIENT
+  - name: int_sales__join_customer
+    description: >
+      Modelo intermediário a partir das tabelas de staging customer, person e store. Grão: 1 linha por customer_pk.
+    columns:
+      - name: customer_pk
+        description: Chave primária do cliente
+        tests:
+          - not_null
+          - unique
+      
+      - name: customer_name
+        description: Nome consolidado do cliente - nome da store e caso não tenha, nome da pessoa física
+        tests:
+          - not_null
+      
+      - name: person_fk
+        description: Chave estrangeira para person garantindo integridade referencial
+        tests:
+          - relationships:
+              to: ref('stg_adw__person')
+              field: person_pk
+      - name: store_fk
+        description: Chave estrangeira para store garantindo integridade referencial
+        tests:
+          - relationships:
+              to: ref('stg_adw__store')
+              field: store_pk
+      
+#PRODUCT
+  - name: int_sales__join_product
+    description: >
+      Modelo intermediário que une product, subcategory e category. Grão: 1 linha por product_pk.
+    columns:
+      - name: product_pk
+        description: Chave primária do produto
+        tests:
+          - not_null
+          - unique
+      - name: product_subcategory_fk
+        description: FK para product_subcategory garantindo integridade referencial
+        tests:
+          - relationships:
+              to: ref('stg_adw__productsubcategory')
+              field: product_subcategory_pk
+      - name: product_category_fk
+        description: FK para product_category garantindo integridade referencial
+        tests:
+          - relationships:
+              to: ref('stg_adw__productcategory')
+              field: product_category_pk
+#ORDERS
+  - name: int_sales__join
+    description: >
+      Modelo intermediário que une order e order_detail. Grão: 1 linha por order_detail_pk.
+    columns:
+      - name: order_details_sk
+        description: Chave primária da order
+        tests:
+          - not_null
+          - unique
+      - name: product_fk
+        description: FK para product garantindo integridade referencial
+        tests:
+          - relationships:
+              to: ref('int_sales__join_product')
+              field: product_pk
+      - name: order_fk
+        description: FK para customer garantindo integridade referencial
+        tests:
+          - relationships:
+              to: ref('stg_adw__orders')
+              field: order_pk
+      - name: customer_fk
+        description: FK para customer garantindo integridade referencial
+        tests:
+          - relationships:
+              to: ref('int_sales__join_customer')
+              field: customer_pk
+      
+#LOCATION
+  - name: int_sales__join_location
+    description: >
+      Modelo intermediário que une city, state e country. Grão: 1 linha por address_pk.
+    columns:
+      - name: address_pk
+        description: Chave primária da cidade
+        tests:
+          - not_null
+          - unique
+      - name: state_fk
+        description: FK para state
+        tests:
+          - relationships:
+              to: ref('stg_adw__state')
+              field: state_pk
+      - name: country_fk
+        description: FK para country
+        tests:
+          - relationships:
+              to: ref('stg_adw__country')
+              field: country_pk
+      - name: city_name
+        description: Nome da cidade
+        tests:
+          - not_null
+      - name: state_name
+        description: Nome do estado
+        tests:
+          - not_null
+      - name: country_name
+        description: Nome do país
+        tests:
+          - not_null
+
+#CREDIT CARD
+  - name: int_sales__credit_card 
+    description: >
+      Modelo intermediário contendo credit_card_type. Grão: 1 linha por credit_card_pk.
+    columns:
+      - name: credit_card_pk
+        description: Chave primária do cartão de crédito
+        tests:
+          - not_null
+          - unique
+
+#REASON
+  - name: int_sales__reason
+    description: >
+      Modelo intermediário contendo reason_type e reason_name. Grão: 1 linha por reason_pk.
+    columns:
+      - name: reason_pk
+        description: Chave primária da reason
+        tests:
+          - not_null
+          - unique

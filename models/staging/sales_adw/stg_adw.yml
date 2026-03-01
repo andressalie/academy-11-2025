@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: stg_adw__headersalesreason
-    description: staging da tabela salesreason
+    description: staging da tabela salesreason - não está dando certo. Cada order_fk tem mais de uma reason_fk
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
