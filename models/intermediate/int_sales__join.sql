@@ -8,14 +8,10 @@ with
         select *
         from {{ ref('stg_adw__orders') }}
     )
-    , header_reason as (
-        select *
-        from {{ ref('stg_adw__headersalesreason') }}
-    )
 
     -- transformation
     , joined as (
-        select
+        select distinct
             od.order_details_sk,
             od.order_fk,
             od.product_fk,
@@ -27,7 +23,7 @@ with
             o.credit_card_fk,
             o.address_fk,
 
-            r.reason_fk,
+            --r.reason_fk,
             
             o.order_date,
             o.ship_date,
@@ -41,8 +37,8 @@ with
             o.freight
 
         from order_details od
-        inner join orders o on od.order_fk = o.order_pk
-        left join header_reason r on od.order_fk = r.order_fk
+        left join orders o on od.order_fk = o.order_pk
+
      )
 
 select * from joined
