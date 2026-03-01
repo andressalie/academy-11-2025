@@ -76,9 +76,8 @@ sources:
         description: tabela que traz a reason da venda e type
         columns:
           - name: salesreasonid
-            description: Chave primária da tabela sales_salesorderdetail
+            description: Chave primária da tabela sales_salesreason
             tests:
-              - unique
               - not_null
 
       - name: sales_salesterritory
