@@ -23,9 +23,13 @@ with sales as (
     select 
     s.*,
     p.product_name,
+    p.product_subcategory_name,
+    p.product_category_name,
+
     l.city_name,
     l.state_name,
     l.country_name,
+    
     r.reason_name
 
     from sales s 
@@ -36,3 +40,4 @@ with sales as (
 
 select *
 from joined
+--where reason_name = 'On Promotion'

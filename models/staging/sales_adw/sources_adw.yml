@@ -57,16 +57,15 @@ sources:
 
       #REASON
       - name: sales_salesorderheadersalesreason
-        description: tabela para conectar orders com a salesreason pelo salesreasonid
+        description: bridge table para conectar orders com a salesreason pelo salesreasonid
     
         columns:
           - name: salesorderid
             description: Chave estrangeira para a tabela salesorderheader
             tests:
-              - unique
               - not_null
 
-          - name: sales_reason_id
+          - name: salesreasonid
             description: Chave estrangeira para a tabela salesreason.
             tests:
               - not_null
@@ -82,7 +81,7 @@ sources:
       
       #LOCATION
       - name: person_countryregion
-        description: dim table com o país para linkar na tabela person_stateprovince
+        description: dim table com o país para linkar na tabela person_stateprovince. Fail no teste not_null porque temos uma linha com countryregioncode nulo (Namibia)
         columns:
           - name: countryregioncode
             description: Chave primária da tabela
@@ -120,14 +119,35 @@ sources:
               - unique
 
 
+    # CUSTOMER 
       - name: sales_customer
-        description: dim table com id do cliente para linkar com person_person
+        description: bridge table para ligar personid com a tabela person_person
+        columns:
+          - name: customerid
+            description: Chave primaria da tabela 
+            tests:
+              - not_null
+              - unique
+      
       - name: person_person
         description: dim table com o nome do cliente
+        columns:
+          - name: businessentityid
+            description: Chave primária da tabela 
+            tests:
+              - not_null
+              - unique
+
+      - name: sales_store
+        description: dim table com o nome do cliente caso seja uma loja
+        columns:
+          - name: businessentityid
+            description: Chave primária da tabela 
+            tests:
+              - not_null
+              - unique
       
-      
-      - name: sales_salesperson
-        description: dim table do vendedor
+    
       - name: sales_specialoffer
         description: dim table das offers
       
