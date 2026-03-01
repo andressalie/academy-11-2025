@@ -71,7 +71,6 @@ sources:
             tests:
               - not_null
             
-       
       - name: sales_salesreason
         description: tabela que traz a reason da venda e type
         columns:
@@ -80,10 +79,35 @@ sources:
             tests:
               - not_null
 
+      
+      #ADDRESS
       - name: sales_salesterritory
-        description: dim table com o territory id para linkar na tabela stateprovince  
+        description: dim table com o territory id e país para linkar na tabela stateprovince  
+        columns:
+          - name: territoryid
+            description: Chave primária da tabela sales_salesterritory
+            tests:
+              - not_null
+              - unique
+
       - name: person_stateprovince
-        description: dim table com o state, city e country
+        description: dim table com o state, para linkar com a tabela address
+        columns:
+          - name: stateprovinceid
+            description: Chave primária da tabela person_stateprovince
+            tests:
+              - not_null
+              - unique
+      
+      - name: person_address
+        description: dim table para nome da cidade
+        columns:
+          - name: addressid
+            description: Chave primária da tabela address
+            tests:
+              - not_null
+              - unique
+
 
 
       - name: sales_creditcard
