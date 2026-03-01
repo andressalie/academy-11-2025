@@ -6,6 +6,8 @@ with
             territoryid,
             salespersonid,
             creditcardid,
+            customerid,
+            shiptoaddressid,
 
             orderdate,
             --duedate,
@@ -23,10 +25,13 @@ with
     select 
         cast(salesorderid as int) as order_pk,
         cast(customerid as int) as customer_fk,
-        cast(territoryid as int) as territory_fk,
-        cast(salespersonid as int) as sales_person_fk,
         cast(creditcardid as int) as credit_card_fk,
 
+        cast(salespersonid as int) as sales_person_fk,
+
+        cast(shiptoaddressid as int) as address_fk,
+        cast(territoryid as int) as territory_fk,
+        ---
         cast(orderdate as date) as order_date,
         cast(shipdate as date) as ship_date,
 
