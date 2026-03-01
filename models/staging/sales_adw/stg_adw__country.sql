@@ -3,17 +3,17 @@ with
 source as (
 
     select 
-        territoryid,
+        countryregioncode,
         name
         
-    from {{ source('adw', 'sales_salesterritory') }}
+    from {{ source('adw', 'person_countryregion') }}
 
 ),
 
 renamed as (
 
     select distinct
-        cast(territoryid as int) as country_pk,
+        cast(countryregioncode as string) as country_pk,
         cast(name as string) as country_name
         
 

@@ -25,6 +25,7 @@ with
             o.territory_fk,
             o.sales_person_fk,
             o.credit_card_fk,
+            o.address_fk,
 
             r.reason_fk,
             
