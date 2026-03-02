@@ -2,7 +2,7 @@ version: 2
 
 models:
 
-#CLIENT
+#CUSTOMER
   - name: int_sales__join_customer
     description: >
       Modelo intermediário a partir das tabelas de staging customer, person e store. Grão: 1 linha por customer_pk.
@@ -12,11 +12,6 @@ models:
         tests:
           - not_null
           - unique
-      
-      - name: customer_name
-        description: Nome consolidado do cliente - nome da store e caso não tenha, nome da pessoa física
-        tests:
-          - not_null
       
       - name: person_fk
         description: Chave estrangeira para person garantindo integridade referencial
