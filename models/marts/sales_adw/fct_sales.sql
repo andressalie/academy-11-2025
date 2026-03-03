@@ -31,13 +31,16 @@ with
             unit_price_discount,
             unit_price * (1 - unit_price_discount) * order_qty as net_total,
             coalesce(unit_price, 0) * coalesce(unit_price_discount, 0) * coalesce(order_qty, 0) as order_discount,
-            
 
             total_due,
-            freight
+            freight,
+            cast(
+                (freight / count(*) over (partition by order_fk))
+            as numeric(18,2)) as freight_allocated
 
         from sales
     )
 
 select *
+
 from dimensions

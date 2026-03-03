@@ -43,7 +43,11 @@ with sales as (
     r.reason_name,
     r.reason_type,
 
-    c.customer_name,
+    c.person_first_name,
+    c.person_middle_name,
+    c.person_last_name,
+    c.store_name,
+
     cc.credit_card_type
 
     from sales s 
