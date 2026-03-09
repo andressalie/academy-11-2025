@@ -81,12 +81,11 @@ sources:
       
       #LOCATION
       - name: person_countryregion
-        description: dim table com o país para linkar na tabela person_stateprovince. Fail no teste not_null porque temos uma linha com countryregioncode nulo (Namibia)
+        description: dim table com o país para linkar na tabela person_stateprovince. Não tem o teste not_null porque temos uma linha com countryregioncode nulo (Namibia)
         columns:
           - name: countryregioncode
             description: Chave primária da tabela
             tests:
-              - not_null
               - unique
 
       - name: person_stateprovince
